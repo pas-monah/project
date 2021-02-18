@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Home page</title>
+<link rel="stylesheet" href="/styles/all.css">
+<link rel="stylesheet" href="/styles/navbar.css">
+</head>
+<body>
+	<div class="navbar" th:fragment="navbar">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li sec:authorize="isAuthenticated()"><a href="/notes/all">Notes</a></li>
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/users/all">Users</a></li>
+			<li >
+				<a sec:authorize="isAnonymous()" href="/login">Login</a>
+				<a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
+			</li>
+			<li sec:authorize="isAnonymous()"><a href="/signup">Signup</a></li>
+		</ul>
+	</div>
+	<div id="main">
+		<h1 th:text="${message}"></h1>
+	</div>
+</body>
+</html>

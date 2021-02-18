@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Home page</title>
+<link rel="stylesheet" href="/styles/all.css">
+<link rel="stylesheet" href="/styles/navbar.css">
+</head>
+<body>
+	<div class="navbar" th:fragment="navbar">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/notes/all">Notes</a></li>
+			<li><a href="/users/all">Users</a></li>
+		</ul>
+	</div>
+	<div id="main">
+		<h1>This is homepage</h1>
+	</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.navbar {
+	list-style-type: none;
+	overflow: hidden;
+	background-color: black;
+	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.navbar li {
+	width: 300px;
+	float: left;
+	list-style-type: none;
+}
+
+.navbar a {
+	display: block;
+	font-size: 20px;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.navbar a:hover {
+	background-color: red;
+	color: black;
+}

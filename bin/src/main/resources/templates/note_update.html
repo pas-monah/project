@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Update note</title>
+<link rel="stylesheet" href="/styles/form.css">
+</head>
+<body>
+	<div id="form">
+		<h1>Update note</h1>
+		<form action="/notes/update" th:name="note" method="post">
+			<p>
+				<input type="text" th:name="id" th:value="${note.id}"
+					readonly="readonly">
+			<p>
+				<input type="text" th:name="label" required="required"
+					th:value="${note.label}">
+			</p>
+			<p>
+				<textarea th:name="message" th:text="${note.message}"></textarea>
+			</p>
+			<input type="image" src="/img/confirm.png"> 
+			<a id="cancel" href="/notes/all"><img src="/img/cancel.png"></a>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Notes list</title>
+<link rel="stylesheet" href="/styles/all.css">
+<link rel="stylesheet" href="/styles/navbar.css">
+</head>
+<body>
+	<div th:insert="home::navbar"></div>
+	<div id="main">
+		<div id="title">
+			<h1>Notes list</h1>
+			<a id="create" href="/notes/create" title="Create"><img src="/img/add.png"></a>
+			<div class="search">
+				<form action="/notes/search">
+					<input name="word" type="text" placeholder="Search..." autofocus="autofocus">
+					<input type="image" src="/img/search.png" title="search">
+				</form>
+			</div>
+		</div>
+		<div class="note" th:each="note : ${notes}">
+			<div class="note_label">
+				<span th:text="${note.id}"></span> <span th:text="${note.label}"></span>
+				<div class="options">
+					<a id="update" title="update" th:href="@{/notes/update/{id}(id=${note.id})}"><img src="/img/update.png"></a>
+					<a id="delete" title="delete" th:href="@{/notes/delete/{id}(id=${note.id})}"><img src="/img/delete.png"></a>
+				</div>
+			</div>
+			<div th:text="${note.message}"></div>
+		</div>
+	</div>
+</body>
+</html>
