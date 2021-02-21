@@ -26,6 +26,7 @@ public class User {
 	private String username;
 	private String password;
 	private String role;
+	private String email;
 
 	private String name;
 	private int age;
@@ -33,6 +34,8 @@ public class User {
 
 	@OneToMany(mappedBy = "user")
 	private List<Note> notes;
+	@OneToMany(mappedBy = "user")
+	private List<Folder> folders;
 	
 	public User(String name, int age, String gender) {
 		this.name = name;
@@ -41,6 +44,9 @@ public class User {
 	}
 	
 	public void addNote(Note note) {
+		if(note.getFolder()!=null) {
+		note.getFolder().getNotes().add(note);			
+		}
 		note.setUser(this);
 		notes.add(note);
 	}

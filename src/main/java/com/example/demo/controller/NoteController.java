@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,11 @@ public class NoteController {
 	}
 
 	@GetMapping("/create")
-	public String create() {
+	public String create(Model model, Principal principal) {
+		if(principal != null) {
+			User user = userRepository.findByUsername(principal.getName());
+			model.addAttribute("folders", user.getFolders());	
+		}
 		return "note_form";
 	}
 	
@@ -53,7 +58,7 @@ public class NoteController {
 			User user = userRepository.findByUsername(principal.getName());
 			user.addNote(note);
 			noteRepository.save(note);
-			userRepository.save(user);
+//			userRepository.save(user);
 		}
 		
 		return "redirect:/notes/all";
@@ -65,9 +70,15 @@ public class NoteController {
 	}
 
 	@GetMapping("/search")
-	public String search(@RequestParam(name = "word") String word, Model model) {
-		List<Note> notes = noteRepository.findByLabelContainingOrMessageContaining(word, word);
-		model.addAttribute("notes", notes);
+	public String search(@RequestParam(name = "word") String word, Model model, Principal principal) {
+		if(principal != null) {
+			User user = userRepository.findByUsername(principal.getName());
+			List<Note> notes = noteRepository.findByLabelContainingOrMessageContaining(word, word);
+			notes.removeIf(n->n.getUser().getId()!=user.getId());
+			model.addAttribute("notes", notes);
+		} else {
+			model.addAttribute("notes", new ArrayList<>());			
+		}
 		return "notes";
 	}
 	
@@ -78,8 +89,12 @@ public class NoteController {
 	}
 	
 	@PostMapping("/update")
-	public String userUpdate(@ModelAttribute(name="note") Note note) {
-		noteRepository.save(note);
+	public String userUpdate(@ModelAttribute(name="note") Note note, Principal principal) {
+		if(principal != null) {
+			User user = userRepository.findByUsername(principal.getName());
+			user.addNote(note);
+			noteRepository.save(note);
+		}
 		return "redirect:/notes/all";
 	}
 }

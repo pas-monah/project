@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Create note</title>
+<link rel="stylesheet" href="/styles/form.css">
+</head>
+<body>
+	<div id="form">
+		<h1>Create folder</h1>
+		<form th:name="folder" action="/folders/add" method="post">
+			<p>
+				<input type="text" th:name="name" placeholder="Enter name">
+			<p>
+			<input type="image" src="/img/confirm.png"> 
+			<a id="cancel" href="/folders/all"><img src="/img/cancel.png"></a>
+		</form>
+	</div>
+</body>
+</html>

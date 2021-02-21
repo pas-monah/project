@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.EmailExistsException;
 import com.example.demo.service.UserService;
 import com.example.demo.service.UsernameExistsException;
 
@@ -64,6 +65,8 @@ public class HomeController {
 			userService.registerNewUser(user);
 			request.login(user.getUsername(), password);
 		} catch(UsernameExistsException e) {
+			return "redirect:/signup";
+		} catch(EmailExistsException e) {
 			return "redirect:/signup";
 		} catch (ServletException e) {
 			e.printStackTrace();

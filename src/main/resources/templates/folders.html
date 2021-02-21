@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Notes list</title>
+<link rel="stylesheet" href="/styles/all.css">
+<link rel="stylesheet" href="/styles/navbar.css">
+</head>
+<body>
+	<div th:insert="home::navbar"></div>
+	<div id="main">
+		<div id="title">
+			<h1>Folders</h1>
+			<a id="create" href="/folders/create" title="Create"><img src="/img/add.png"></a>
+		</div>
+		<div class="note" th:each="folder : ${folders}">
+			<div class="note_label">
+				<img src="/img/folder.png">
+				<a id="folder_name" th:href=@{/folders/show/{id}(id=${folder.id})} th:text="${folder.name}"></a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,12 +1,18 @@
 @charset "UTF-8";
 
+body {
+	background-color: gray;
+}
+
 form {
+	background: rgb(204, 204, 204);
     margin-left: auto;
     margin-right: auto;
     padding-left: 20px;
     padding-right: 20px;
     width: 40%;
-    border: 3px solid #f1f1f1;
+    border: 2px solid rgb(255, 128, 64);
+    border-radius: 15px;
 }
 
 input[type=text], input[type=password], input[type=email] {
@@ -26,17 +32,18 @@ input[type=number] {
 
 
 button {
-    background-color: #4CAF50;
+    background-color: #804040;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 100%;
+    border-radius: 10px;
 }
 
 button:hover {
-    background-color: #429144;
+    background-color: #ff8040;
 }
 
 .container {

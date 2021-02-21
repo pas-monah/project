@@ -12,6 +12,7 @@
 		<ul>
 			<li><a href="/">Home</a></li>
 			<li sec:authorize="isAuthenticated()"><a href="/notes/all">Notes</a></li>
+			<li sec:authorize="isAuthenticated()"><a href="/folders/all">Folders</a></li>
 			<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/users/all">Users</a></li>
 			<li >
 				<a sec:authorize="isAnonymous()" href="/login">Login</a>

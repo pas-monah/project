@@ -19,6 +19,13 @@
 			<p>
 				<textarea th:name="message" th:text="${note.message}"></textarea>
 			</p>
+			<p>
+				<span>folder</span>
+				<select th:id="folder" th:name="folder">
+					<option th:value="0" th:text="-------------" selected="selected"></option>
+					<option th:each="f:${note.user.folders}" th:value="${f.id}" th:text="${f.name}"></option>
+				</select>
+			<p>
 			<input type="image" src="/img/confirm.png"> 
 			<a id="cancel" href="/notes/all"><img src="/img/cancel.png"></a>
 		</form>
