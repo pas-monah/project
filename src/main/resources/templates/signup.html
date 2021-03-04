@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="/styles/sign_form.css">
 </head>
 <body>
-<form id="signup_form" name="user" th:action="@{/signup}" method="post">
+<form id="signup_form" name="user" th:action="@{/signup}" method="post" onsubmit="return check()">
    <div class="container">
+  		<div id="msg"></div>
         <h2>Please sign up</h2>
         <div>Username
             <input type="text" name="username"
@@ -16,17 +17,19 @@
                    required="required">
         </div>
         <div>Password
-            <input type="password" name="password"
+            <input type="password" name="password" id="password"
                    pattern="[a-zA-Z0-9]{8,}"
                    placeholder="At least 8 letters or digits"
                    required="required">
         </div>
         <div>Confirm password
-            <input type="password"
+            <input type="password" id="confirm-password"
                    pattern="[a-zA-Z0-9]{8,}"
                    placeholder="At least 8 letters or digits"
-                   required="required">
+                   required="required"
+                   onkeyup="check()">
         </div>
+        <input type="checkbox" onclick="showPasswords()">Show Passwords
         <div>E-mail
             <input type="text" name="email"
                    placeholder="example@gmail.com"
@@ -52,21 +55,7 @@
         <button type="submit" value="Sign up">Sign Up</button>
         <a href="/login">Do you have an account? Sign in</a>
     </div>
-    <script>
-        function check() {
-            let password = document.getElementById('password').value
-            let confirm_passsword = document.getElementById('confirm_password').value
-            let msg = document.getElementById('error')
-            msg.innerText = ''
-
-            if (password != confirm_passsword) {
-                msg.innerHTML = 'Confirm password does not match!'
-                return false
-            } else {
-                msg.innerText = ''
-                return true
-            }
-        }
+    <script type="text/javascript" src="/scripts/signup.js">
     </script>
 </form>
 </body>
