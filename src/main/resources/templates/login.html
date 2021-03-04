@@ -8,8 +8,8 @@
 			<div th:if="${param.error}" class="error">Invalid credentials!</div>
 			<div th:if="${param.denied}" class="error">Access denied!</div>
 
-
-			<h2>Please sign in</h2>
+				<h2>Please sign in</h2>
+					
 			<input type="text" placeholder="Enter Username" name="username"
 				required="required"> <input type="password"
 				placeholder="Enter Password" name="password" required="required">
@@ -17,6 +17,12 @@
 			<p>
 			<input type="image" src="/img/confirm.png"> 
 			<a id="cancel" href="/"><img src="/img/cancel.png"></a>
+		</div>
+		<div id="with">
+			<h3>Sign in with: </h3>
+			<a href="/oauth2/authorization/google" title="Google"><img alt="Google" src="/img/google.png"></a>
+			<a href="/oauth2/authorization/facebook" title="Facebook"><img alt="Facebook" src="/img/facebook.png"></a>
+			<a href="/oauth2/authorization/github" title="Github"><img alt="Github" src="/img/github.png"></a>	
 		</div>
 	</form>
 </body>

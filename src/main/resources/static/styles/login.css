@@ -10,6 +10,7 @@ form {
 	margin-right: auto;
 	padding-left: 20px;
 	padding-right: 20px;
+	padding-bottom: 20px;
 	width: 50%;
 	border: 2px solid rgb(255, 128, 64);
 	border-radius: 15px;
@@ -39,10 +40,24 @@ input[type=image]{
 	margin-left: 50px;
 }
 
-a img{
+#cancel img{
 	width: 75px;
 	float:right;
 	margin-right: 50px;
+}
+
+#with{
+	display: flex;
+	flex-direction: row;
+}
+
+#with a{
+	margin: 10px;
+	margin-left: 50px;
+}
+
+#with img{
+	width: 40px;
 }
 
 .container {

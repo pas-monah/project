@@ -1,17 +1,24 @@
 package com.example.demo.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.model.Folder;
+import com.example.demo.model.Note;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.EmailExistsException;
@@ -34,11 +41,32 @@ public class HomeController {
 		if (principal != null) {
 			String username = principal.getName();
 			User user = ur.findByUsername(username);
+			if(user==null) {
+				return "redirect:/loginSuccess";
+			}
 			model.addAttribute("message", "Welcome, " + user.getName());
 		} else {
 			model.addAttribute("message", "Welcome to my application");
 		}
 		return "home";
+	}
+	
+	@GetMapping("/loginSuccess")
+	public String success(Principal principal) {
+		User user = ur.findByUsername(principal.getName());
+		if(user==null) {
+			SecurityContext ctx = SecurityContextHolder.getContext();
+			Authentication auth =  ctx.getAuthentication();
+			DefaultOAuth2User authUser = (DefaultOAuth2User) auth.getPrincipal();
+			String name = authUser.getAttribute("name");
+			User newUser = new User();
+			newUser.setName(name);
+			newUser.setUsername(principal.getName());
+			newUser.setNotes(new ArrayList<Note>());
+			newUser.setFolders(new ArrayList<Folder>());
+			ur.save(newUser);
+		}
+		return "redirect:/";
 	}
 
 

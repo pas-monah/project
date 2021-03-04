@@ -30,7 +30,7 @@ public class UserService {
 		if(userRepository.findByEmail(user.getEmail()) != null) {
 			throw new EmailExistsException(user.getEmail());
 		}
-		user.setRole("ROLR_USER");
+		user.setRole("ROLE_USER");
 		user.setNotes(new ArrayList<Note>());
 		user.setFolders(new ArrayList<Folder>());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
